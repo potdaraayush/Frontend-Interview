@@ -18,7 +18,7 @@ export function BlogCard({ blog, onClick }: BlogCardProps) {
       </CardHeader>
       <CardContent>
         <CardDescription className="text-gray-700">
-          {blog.content.slice(0, 120)}...
+          {blog.content.slice(0, 20)}...
         </CardDescription>
       </CardContent>
     </Card>
