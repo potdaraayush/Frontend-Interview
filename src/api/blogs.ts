@@ -39,3 +39,13 @@ export async function createBlog(
 
   return res.json();
 }
+
+export async function deleteBlog(id: string) {
+  const res = await fetch(`http://localhost:3001/blogs/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete blog");
+  }
+}
