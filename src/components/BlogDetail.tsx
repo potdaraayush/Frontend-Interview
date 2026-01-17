@@ -14,13 +14,13 @@ export function BlogDetail() {
   if (!blog) return <div className="p-4">Blog not found</div>;
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
+    <div className="px-6 py-10 max-w-3xl mx-auto">
       <Card className="shadow-md">
         <CardHeader>
-          <CardTitle className="text-2xl md:text-3xl">{blog.title}</CardTitle>
+          <CardTitle className="text-2xl md:text-3xl leading-tight">{blog.title}</CardTitle>
         </CardHeader>
         <CardContent>
-          <CardDescription className="text-gray-700 whitespace-pre-line">
+          <CardDescription className="text-base leading-relaxed text-muted-foreground whitespace-pre-line">
             {blog.content}
           </CardDescription>
         </CardContent>

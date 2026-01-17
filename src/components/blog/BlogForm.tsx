@@ -61,7 +61,7 @@ export function BlogForm() {
             </p>
           )}
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button type="submit" variant="default" className="w-full" disabled={isPending}>
             {isPending ? "Publishing..." : "Publish"}
           </Button>
         </form>

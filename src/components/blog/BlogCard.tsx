@@ -1,27 +1,39 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import type { Blog } from "@/types/blog";
 
-//defines the props for BlogCard component
 interface BlogCardProps {
-    blog: Blog;
-    onClick?: () => void;
+  blog: Blog;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
-export function BlogCard({ blog, onClick }: BlogCardProps) {
-    return (
+export function BlogCard({ blog, onClick, isActive = false }: BlogCardProps) {
+  return (
     <Card
-      className="hover:shadow-lg transition-shadow duration-300 cursor-pointer"
       onClick={onClick}
+      className={`
+        cursor-pointer transition-all duration-200
+        hover:shadow-md
+        ${isActive ? "border-l-4 border-primary" : "border-l-4 border-transparent"}
+      `}
     >
       <CardHeader>
-        <CardTitle className="text-lg md:text-xl">{blog.title}</CardTitle>
+        <CardTitle className="text-base md:text-lg leading-snug">
+          {blog.title}
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <CardDescription className="text-gray-700">
+
+      <CardContent className="mt-2">
+        <CardDescription className="text-sm text-muted-foreground mt-2">
           {blog.content.slice(0, 20)}...
         </CardDescription>
       </CardContent>
     </Card>
   );
 }
-
