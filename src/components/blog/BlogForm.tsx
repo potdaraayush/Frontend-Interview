@@ -10,19 +10,28 @@ export function BlogForm() {
   const { mutate, isPending, error } = useCreateBlog();
 
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("");
+  const [coverImage, setCoverImage] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    // parsing logic
+    const categoryArray = category
+      .split(",")
+      .map((cat) => cat.trim())
+      .filter((cat) => cat.length > 0);
+
     mutate(
       {
         title,
+        description,
         content,
-        category: [],
-        description: content.slice(0, 120),
+        category: categoryArray,
         date: new Date().toISOString(),
-        coverImage: "",
+        coverImage,
       },
       {
         onSuccess: (createdBlog) => {
@@ -48,8 +57,29 @@ export function BlogForm() {
           />
 
           <textarea
-            className="w-full min-h-[180px] rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-            placeholder="Start writing..."
+            className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder="Short description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+
+          <Input
+            placeholder="Categories"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
+
+          <Input
+            placeholder="Cover image URL"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
+          />
+
+          <textarea
+            className="w-full min-h-[240px] rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder="Article content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required

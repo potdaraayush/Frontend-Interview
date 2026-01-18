@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import type { Blog } from "@/types/blog";
+import { formatRelativeTime } from "@/lib/utils";
 
 interface BlogCardProps {
   blog: Blog;
@@ -14,26 +8,36 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ blog, onClick, isActive = false }: BlogCardProps) {
+  const category = blog.category[0] || "Uncategorized";
+
   return (
-    <Card
+    <div
       onClick={onClick}
       className={`
-        cursor-pointer transition-all duration-200
-        hover:shadow-md
-        ${isActive ? "border-l-4 border-primary" : "border-l-4 border-transparent"}
+        p-4 cursor-pointer transition-colors duration-200
+        border-l-4
+        ${isActive ? "border-l-primary" : "border-l-transparent"}
       `}
     >
-      <CardHeader>
-        <CardTitle className="text-base md:text-lg leading-snug">
-          {blog.title}
-        </CardTitle>
-      </CardHeader>
+      {/* Metadata row */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-medium text-muted-foreground">
+          {category}
+        </span>
+        <span className="text-xs text-muted-foreground">
+          {formatRelativeTime(blog.date)}
+        </span>
+      </div>
 
-      <CardContent className="mt-2">
-        <CardDescription className="text-sm text-muted-foreground mt-2">
-          {blog.content.slice(0, 20)}...
-        </CardDescription>
-      </CardContent>
-    </Card>
+      {/* Title */}
+      <h3 className="text-base md:text-lg font-semibold mb-2 leading-snug">
+        {blog.title}
+      </h3>
+
+      {/* Description - max 2 lines */}
+      <p className="text-sm text-muted-foreground line-clamp-2">
+        {blog.description}
+      </p>
+    </div>
   );
 }

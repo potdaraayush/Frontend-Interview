@@ -24,14 +24,15 @@ export function BlogList() {
       </div>
 
       {/* blog list */}
-      <div className="flex flex-col gap-2 px-2">
+      <div className="flex flex-col gap-0 px-2">
         {blogs.map((blog) => (
-          <BlogCard
-            key={blog.id}
-            blog={blog}
-            isActive={blog.id === activeId}
-            onClick={() => navigate(`/blogs/${blog.id}`)}
-          />
+          <div key={blog.id} className="border-b border-border last:border-b-0">
+            <BlogCard
+              blog={blog}
+              isActive={blog.id === activeId}
+              onClick={() => navigate(`/blogs/${blog.id}`)}
+            />
+          </div>
         ))}
       </div>
     </div>
